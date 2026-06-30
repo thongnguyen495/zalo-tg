@@ -6,6 +6,15 @@ import { setupTelegramHandler } from './telegram/handler.js';
 import { config } from './config.js';
 import { startUpdateChecker } from './updater.js';
 import { store } from './store.js';
+import http from 'http';
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bridge is running\n');
+});
+const PORT = process.env.PORT || 10000;
+server.listen(PORT, () => {
+  console.log(`Fake web server listening on port ${PORT}`);
+});
 
 // ── Global safety net — prevent unhandled rejections from crashing ────────────
 process.on('unhandledRejection', (reason) => {
